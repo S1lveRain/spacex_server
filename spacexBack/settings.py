@@ -27,11 +27,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4@adpg-6f#jizy
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'raindesu.pythonanywhere.com'
-    'www.raindesu.pythonanywhere.com'
+    '31.129.98.113'
 ]
 
 
