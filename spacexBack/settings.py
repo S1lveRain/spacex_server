@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4@adpg-6f#jizyg63vcl^66009(h*hfec*-rlr*w^n6d1w%ohd'
+# SECRET_KEY = 'django-insecure-4@adpg-6f#jizyg63vcl^66009(h*hfec*-rlr*w^n6d1w%ohd'
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4@adpg-6f#jizyg63vcl^66009(h*hfec*-rlr*w^n6d1w%ohd')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'raindesu.pythonanywhere.com'
+    'www.raindesu.pythonanywhere.com'
+]
 
 
 # Application definition
@@ -51,6 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'spacexBack.urls'
@@ -121,7 +129,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
